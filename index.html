@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
     <title>Daily Motivation</title>
+    <!-- React and ReactDOM CDN links -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <style>
         @import url('https://fonts.cdnfonts.com/css/roca-one');
         
@@ -37,6 +38,7 @@
             color: white;
             margin: 0;
             text-align: center;
+            font-size: 1.5rem;
         }
         .header-text {
             font-family: 'Roca One', sans-serif;
@@ -96,7 +98,16 @@
 <body>
     <div id="root"></div>
     <script>
-        const QuoteCarousel = () => {
+        'use strict';
+
+        // Get day of year for default quote
+        const today = new Date();
+        const startOfYear = new Date(today.getFullYear(), 0, 0);
+        const dayOfYear = Math.floor((today - startOfYear) / (1000 * 60 * 60 * 24));
+
+        function App() {
+            const [currentQuote, setCurrentQuote] = React.useState(dayOfYear % 9);
+            
             const quotes = [
                 "Every line of code I learn is one step further from minimum wage.",
                 "I don't need to learn like everyone else - I just need to keep learning.",
@@ -109,25 +120,12 @@
                 "I'm trading comfort for growth, and that's a worthy exchange."
             ];
 
-            // Get today's quote based on the day of the year
-            const today = new Date();
-            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-            const [currentQuote, setCurrentQuote] = React.useState(dayOfYear % quotes.length);
-
-            const handleDotClick = (index) => {
-                setCurrentQuote(index);
-            };
-
             return React.createElement(
                 'div',
-                { 
-                    className: `container transition-gradient gradient-${currentQuote % 3}`,
-                },
+                { className: `container transition-gradient gradient-${currentQuote % 3}` },
                 React.createElement(
                     'div',
-                    { 
-                        className: 'content-wrapper'
-                    },
+                    { className: 'content-wrapper' },
                     React.createElement(
                         'div',
                         { className: 'header-text' },
@@ -135,37 +133,26 @@
                     ),
                     React.createElement(
                         'p',
-                        { 
-                            className: 'quote-text text-2xl transition-opacity duration-1000',
-                            style: { 
-                                maxWidth: '400px',
-                                lineHeight: '1.6'
-                            }
-                        },
+                        { className: 'quote-text' },
                         quotes[currentQuote]
                     ),
                     React.createElement(
                         'div',
                         { className: 'dots-container' },
                         quotes.map((_, index) => 
-                            React.createElement(
-                                'div',
-                                {
-                                    key: index,
-                                    className: `dot ${index === currentQuote ? 'active' : ''}`,
-                                    onClick: () => handleDotClick(index)
-                                }
-                            )
+                            React.createElement('div', {
+                                key: index,
+                                className: `dot ${index === currentQuote ? 'active' : ''}`,
+                                onClick: () => setCurrentQuote(index)
+                            })
                         )
                     )
                 )
             );
-        };
+        }
 
-        ReactDOM.render(
-            React.createElement(QuoteCarousel),
-            document.getElementById('root')
-        );
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(React.createElement(App));
     </script>
 </body>
 </html>
