@@ -5,75 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-    <title>Python Learning Motivation</title>
+    <title>Daily Motivation</title>
     <style>
-        html, body {
+        * {
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
+            box-sizing: border-box;
         }
-        
-        #root {
-            width: 100%;
-            height: 100%;
+
+        body {
             min-height: 100vh;
+            width: 100vw;
+            overflow: hidden;
         }
-        
+
+        #root {
+            width: 100vw;
+            height: 100vh;
+        }
+
         .gradient-bg {
             background: radial-gradient(circle at center, #ff7b7b 0%, #c12bfb 50%, #fa7946 100%);
-        }
-        .quote-text {
-            font-family: Arial, sans-serif;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            letter-spacing: 0.05em;
-            color: white;
-            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
             text-align: center;
-            font-weight: 300;
-            font-size: 1.5em;
-            line-height: 1.6;
-            padding: 0 20px;
         }
+
         .header-text {
             font-family: Arial, sans-serif;
             background-color: rgba(255, 255, 255, 0.2);
             padding: 12px 24px;
             border-radius: 20px;
             color: white;
-            font-size: 1rem;
+            font-size: max(16px, 2vw);
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            text-align: center;
-            margin: 0 0 20px 0;
-            font-weight: 300;
+            margin-bottom: 2rem;
         }
-        .container {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .content-wrapper {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            box-sizing: border-box;
-            text-align: center;
-        }
-        @media (max-width: 768px) {
-            .quote-text {
-                font-size: 1.2em;
-            }
-            .header-text {
-                font-size: 0.9rem;
-                padding: 8px 16px;
-            }
+
+        .quote-text {
+            font-family: Arial, sans-serif;
+            color: white;
+            font-size: max(20px, 2.5vw);
+            line-height: 1.6;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 0 1rem;
+            max-width: 90%;
         }
     </style>
 </head>
@@ -99,20 +81,16 @@
 
             return React.createElement(
                 'div',
-                { className: 'container gradient-bg' },
+                { className: 'gradient-bg' },
                 React.createElement(
                     'div',
-                    { className: 'content-wrapper' },
-                    React.createElement(
-                        'div',
-                        { className: 'header-text' },
-                        'TODAY\'S PYTHON MOTIVATION'
-                    ),
-                    React.createElement(
-                        'p',
-                        { className: 'quote-text' },
-                        quotes[quoteIndex]
-                    )
+                    { className: 'header-text' },
+                    'TODAY\'S PYTHON MOTIVATION'
+                ),
+                React.createElement(
+                    'p',
+                    { className: 'quote-text' },
+                    quotes[quoteIndex]
                 )
             );
         };
