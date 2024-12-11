@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <title>Python Learning Motivation</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        #root {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gradient-bg {
+            background: radial-gradient(circle at center, #67d35f 0%, #c12bfb 50%, #fa7946 100%);
+        }
+        .quote-text {
+            font-family: Arial, sans-serif;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            letter-spacing: 0.05em;
+            color: white;
+            margin: 0;
+            text-align: center;
+            font-weight: 300;
+        }
+        .header-text {
+            font-family: Arial, sans-serif;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 0 0 20px 0;
+            font-weight: 300;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 500px;
+            aspect-ratio: 1;
+            border-radius: 24px;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script>
+        const DailyQuote = () => {
+            const quotes = [
+                "Each Python function I master is a step toward my goals.",
+                "Debugging is teaching me patience and problem-solving.",
+                "Today's errors are tomorrow's expertise.",
+                "My learning style is unique - and that's my advantage.",
+                "Every line of code makes me a better programmer.",
+                "Consistency over speed - I'm building my future.",
+                "Errors are just opportunities to learn something new.",
+                "I'm not just learning Python - I'm upgrading my thinking.",
+                "Small steps each day lead to big achievements."
+            ];
+
+            // Get today's date and use it to select a quote
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            const quoteIndex = dayOfYear % quotes.length;
+
+            return React.createElement(
+                'div',
+                { className: 'container' },
+                React.createElement(
+                    'div',
+                    { className: 'content-wrapper gradient-bg' },
+                    React.createElement(
+                        'div',
+                        { className: 'header-text' },
+                        'Today\'s Python Motivation'
+                    ),
+                    React.createElement(
+                        'p',
+                        { 
+                            className: 'quote-text text-2xl',
+                            style: { 
+                                maxWidth: '400px',
+                                lineHeight: '1.6'
+                            }
+                        },
+                        quotes[quoteIndex]
+                    )
+                )
+            );
+        };
+
+        ReactDOM.render(
+            React.createElement(DailyQuote),
+            document.getElementById('root')
+        );
+    </script>
+</body>
+</html>
